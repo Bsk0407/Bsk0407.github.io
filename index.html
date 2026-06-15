@@ -2,10 +2,393 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>나의 포트폴리오</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김범수 | Portfolio</title>
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --surface: #ffffff;
+            --ink: #172033;
+            --muted: #637083;
+            --line: #dce3ec;
+            --accent: #0f766e;
+            --accent-soft: #dff5f2;
+            --warm: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Arial, "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .shell {
+            width: min(1040px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 68px;
+            gap: 20px;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .links {
+            display: flex;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .links a {
+            text-decoration: none;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            align-items: center;
+            gap: 48px;
+            padding: 72px 0 52px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: var(--warm);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 1.05;
+            letter-spacing: 0;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 19px;
+        }
+
+        .profile {
+            width: min(320px, 100%);
+            justify-self: end;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+
+        .profile img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        main {
+            padding-bottom: 72px;
+        }
+
+        section {
+            padding: 44px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .section-note {
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            min-height: 168px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .tag {
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .project-empty {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 22px;
+            align-items: center;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+
+        .project-mark {
+            display: grid;
+            place-items: center;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            background: #172033;
+            color: #ffffff;
+            font-size: 42px;
+            font-weight: 800;
+        }
+
+        .project-empty h3 {
+            margin: 0 0 8px;
+            font-size: 21px;
+        }
+
+        .project-empty p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .contact a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        footer {
+            padding: 28px 0;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 16px 0;
+            }
+
+            .links {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding-top: 48px;
+            }
+
+            .profile {
+                justify-self: start;
+                width: min(260px, 100%);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .project-empty {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>안녕하세요! AI 바이브 코딩으로 만든 웹사이트입니다.</h1>
-    <p>현재 테스트 중입니다.</p>
+    <header>
+        <nav class="shell" aria-label="주요 메뉴">
+            <div class="brand">김범수</div>
+            <div class="links">
+                <a href="#about">About</a>
+                <a href="#interests">Interests</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="shell">
+        <section class="hero" aria-labelledby="hero-title">
+            <div>
+                <div class="eyebrow">AI Portfolio</div>
+                <h1 id="hero-title">LLM과 멀티모달 AI를 탐구하는 김범수입니다.</h1>
+                <p>
+                    언어 모델이 텍스트, 이미지, 음성 등 다양한 정보를 이해하고 연결하는 방식에 관심이 많습니다.
+                    이 웹사이트는 GitHub Pages와 AI 코딩 도구를 활용해 만든 개인 포트폴리오입니다.
+                </p>
+            </div>
+            <figure class="profile">
+                <img src="assets/profile.jpg" alt="김범수 프로필 이미지">
+            </figure>
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+            <div class="section-head">
+                <h2 id="about-title">About Me</h2>
+                <p class="section-note">관심사를 중심으로 정리한 자기소개</p>
+            </div>
+            <div class="card">
+                <h3>김범수</h3>
+                <p>
+                    저는 LLM과 멀티모달 기술에 관심을 가지고 있습니다. 특히 사람이 자연스럽게 사용하는 언어와
+                    다양한 형태의 데이터를 AI가 함께 이해하고 활용하는 방법을 배우고 싶습니다.
+                </p>
+                <div class="tag-list" aria-label="관심 키워드">
+                    <span class="tag">LLM</span>
+                    <span class="tag">Multimodal AI</span>
+                    <span class="tag">GitHub Pages</span>
+                    <span class="tag">Vibe Coding</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests" aria-labelledby="interests-title">
+            <div class="section-head">
+                <h2 id="interests-title">Interests</h2>
+                <p class="section-note">앞으로 더 깊게 공부하고 싶은 주제</p>
+            </div>
+            <div class="grid">
+                <article class="card">
+                    <h3>Large Language Models</h3>
+                    <p>LLM의 추론, 프롬프트 설계, 실제 서비스 적용 방식에 관심이 있습니다.</p>
+                </article>
+                <article class="card">
+                    <h3>Multimodal Learning</h3>
+                    <p>텍스트와 이미지처럼 서로 다른 데이터가 하나의 모델 안에서 연결되는 방식을 탐구하고 싶습니다.</p>
+                </article>
+                <article class="card">
+                    <h3>Human-AI Interaction</h3>
+                    <p>AI가 사람의 학습, 창작, 문제 해결 과정을 어떻게 도울 수 있는지 고민하고 있습니다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+            <div class="section-head">
+                <h2 id="projects-title">Projects</h2>
+                <p class="section-note">현재는 학습과 실험을 준비하는 단계입니다</p>
+            </div>
+            <div class="project-empty">
+                <div class="project-mark" aria-hidden="true">AI</div>
+                <div>
+                    <h3>Coming Soon</h3>
+                    <p>
+                        아직 등록할 프로젝트는 없지만, 앞으로 LLM과 멀티모달 AI를 활용한 작은 실험과 결과물을
+                        이곳에 정리할 예정입니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+            <div class="section-head">
+                <h2 id="contact-title">Contact</h2>
+                <p class="section-note">연락 가능한 이메일</p>
+            </div>
+            <div class="contact">
+                <a href="mailto:bsk5941@snu.ac.kr">bsk5941@snu.ac.kr</a>
+                <a href="https://github.com/bsk0407">github.com/bsk0407</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="shell">© 2026 김범수. Built with GitHub Pages.</div>
+    </footer>
 </body>
 </html>
